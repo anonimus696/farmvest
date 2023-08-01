@@ -11,29 +11,41 @@
 	$mail->setLanguage('ru', 'phpmailer/language/');
 	$mail->IsHTML(true);
 
-	/*
+/* 
 	$mail->isSMTP();                                            //Send using SMTP
-	$mail->Host       = 'smtp.example.com';                     //Set the SMTP server to send through
+	$mail->Host       = 'mail.adm.tools';                     //Set the SMTP server to send through
 	$mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-	$mail->Username   = 'user@example.com';                     //SMTP username
-	$mail->Password   = 'secret';                               //SMTP password
+	$mail->Username   = 'admin@farmvest.website';                     //SMTP username
+	$mail->Password   = '123qwe#@!Q';                               //SMTP password
 	$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
 	$mail->Port       = 465;                 
-	*/
-
+ */
 	//Від кого лист
-	$mail->setFrom('farmvest@gmail.com', 'Фрілансер по життю'); // Вказати потрібний E-mail
+	$mail->setFrom('farmvest@gmail.com', 'Farmvest'); // Вказати потрібний E-mail
 	//Кому відправити
-	$mail->addAddress('vkutikina@gmail.com'); // Вказати потрібний E-mail
+	$mail->addAddress('admin@farmvest.website'); // Вказати потрібний E-mail
 	//Тема листа
-	$mail->Subject = 'Вітання! Це "Фрілансер по життю"';
+	$mail->Subject = 'Нове повідомлення користувача';
 
 	//Тіло листа
-	$body = '<h1>Зустрічайте супер листа!</h1>';
+	$body = '<h3>Інформація користувача</h3>';
 
 	if(trim(!empty($_POST['email']))){
-		$body.=$_POST['email'];
+		$body.= '<p> <strong>Email address:</strong> '.$_POST['email'].'</p>';
 	}	
+
+	if(trim(!empty($_POST['name']))){
+		$body.= '<p> <strong>Name:</strong> '.$_POST['name'].'</p>';
+	}	
+
+	if(trim(!empty($_POST['phone']))){
+		$body.= '<p> <strong>Phone:</strong> '.$_POST['phone'].'</p>';
+	}	
+
+	if(trim(!empty($_POST['message']))){
+		$body.= '<p> <strong>Message:</strong> '.$_POST['message'].'</p>';
+	}	
+
 	
 	/*
 	//Прикріпити файл
@@ -53,13 +65,30 @@
 
 	//Відправляємо
 	if (!$mail->send()) {
-		$message = 'Помилка';
+		$message = 'Error';
 	} else {
-		$message = 'Дані надіслані!';
+		$message = 'Send success!';
 	}
 
-	$response = ['message' => $message];
+	// $response = ['message' => $message];
 
-	header('Content-type: application/json');
-	echo json_encode($response);
+	// header('Content-type: application/json');
+	// echo json_encode($response);
+
+	// header('Location: http://www.farmvest.website/home.html');
+
+	header('Location: http://www.farmvest.website/sendok.html');
+
 ?>
+
+<!-- 
+echo
+	"
+	<script>
+	document.location.href = 'http://www.farmvest.website/home.html';
+	document.body.classList.add('success');
+	</script>
+	
+	";
+-->
+
